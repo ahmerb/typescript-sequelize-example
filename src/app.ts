@@ -1,2 +1,12 @@
-const str: string = "hey";
-console.log(str);
+import express from 'express';
+import { Request, Response } from 'express';
+
+const app: express.Application = express();
+
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({ message: 'hello, world' });
+});
+
+app.listen(3000, () => {
+  console.log('App listening on port 3000');
+});
