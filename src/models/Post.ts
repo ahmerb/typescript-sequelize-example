@@ -1,4 +1,6 @@
 import * as Sequelize from 'sequelize';
+import { CommentAttributes, CommentInstance } from 'models/Comment';
+import { UserAttributes, UserInstance } from 'models/User';
 import { SequelizeAttributes } from 'typings/SequelizeAttributes';
 
 export interface PostAttributes {
@@ -9,9 +11,25 @@ export interface PostAttributes {
   category: 'tech' | 'croissants' | 'techno';
   createdAt?: Date;
   updatedAt?: Date;
+  comments?: CommentInstance[] | CommentInstance['id'][];
+  author?: UserInstance | UserInstance['id'];
 };
 
 export interface PostInstance extends Sequelize.Instance<PostAttributes>, PostAttributes {
+  getComments: Sequelize.HasManyGetAssociationsMixin<CommentInstance>;
+  setComments: Sequelize.HasManySetAssociationsMixin<CommentInstance, CommentInstance["id"]>;
+  addComments: Sequelize.HasManyAddAssociationsMixin<CommentInstance, CommentInstance["id"]>;
+  addComment: Sequelize.HasManyAddAssociationMixin<CommentInstance, CommentInstance["id"]>;
+  createComment: Sequelize.HasManyCreateAssociationMixin<CommentAttributes, CommentInstance>;
+  removeComment: Sequelize.HasManyRemoveAssociationMixin<CommentInstance, CommentInstance["id"]>;
+  removeComments: Sequelize.HasManyRemoveAssociationsMixin<CommentInstance, CommentInstance["id"]>;
+  hasComment: Sequelize.HasManyHasAssociationMixin<CommentInstance, CommentInstance["id"]>;
+  hasComments: Sequelize.HasManyHasAssociationsMixin<CommentInstance, CommentInstance["id"]>;
+  countComments: Sequelize.HasManyCountAssociationsMixin;
+
+  getAuthor: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
+  setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance["id"]>;
+  createAuthor: Sequelize.BelongsToCreateAssociationMixin<UserAttributes>;
 };
 
 export const PostFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<PostInstance, PostAttributes> => {
@@ -31,6 +49,11 @@ export const PostFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
   };
 
   const Post = sequelize.define<PostInstance, PostAttributes>("Post", attributes);
+
+  Post.associate = models => {
+    Post.hasMany(models.Comment);
+    Post.belongsTo(models.User, { as: 'author' });
+  };
 
   return Post;
 };
