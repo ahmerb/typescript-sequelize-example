@@ -58,8 +58,8 @@ export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
   const User = sequelize.define<UserInstance, UserAttributes>('User', attributes);
 
   User.associate = models => {
-    User.hasMany(models.Comment);
-    User.hasMany(models.Post);
+    User.hasMany(models.Comment, { foreignKey: 'AuthorId' });
+    User.hasMany(models.Post, { foreignKey: 'AuthorId' });
     User.belongsToMany(models.Comment, {
       through: 'PostUpvotes',
       as: 'upvotedComments'
