@@ -15,22 +15,22 @@ export interface CommentAttributes {
 
 export interface CommentInstance extends Sequelize.Instance<CommentAttributes>, CommentAttributes {
   getPost: Sequelize.BelongsToGetAssociationMixin<PostInstance>;
-  setPost: Sequelize.BelongsToSetAssociationMixin<PostInstance, PostInstance["id"]>;
+  setPost: Sequelize.BelongsToSetAssociationMixin<PostInstance, PostInstance['id']>;
   createPost: Sequelize.BelongsToCreateAssociationMixin<PostAttributes>;
 
   getAuthor: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
-  setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance["id"]>;
+  setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance['id']>;
   createAuthor: Sequelize.BelongsToCreateAssociationMixin<UserAttributes>;
 
   getUpvoters: Sequelize.BelongsToManyGetAssociationsMixin<UserInstance>;
-  setUpvoters: Sequelize.BelongsToManySetAssociationsMixin<UserInstance, UserInstance["id"], "PostUpvotes">;
-  addUpvoters: Sequelize.BelongsToManyAddAssociationsMixin<UserInstance, UserInstance["id"], "PostUpvotes">;
-  addUpvoter: Sequelize.BelongsToManyAddAssociationMixin<UserInstance, UserInstance["id"], "PostUpvotes">;
-  createUpvoters: Sequelize.BelongsToManyCreateAssociationMixin<UserAttributes, UserInstance["id"], "PostUpvotes">;
-  removeUpvoter: Sequelize.BelongsToManyRemoveAssociationMixin<UserInstance, UserInstance["id"]>;
-  removeUpvoters: Sequelize.BelongsToManyRemoveAssociationsMixin<UserInstance, UserInstance["id"]>;
-  hasUpvoter: Sequelize.BelongsToManyHasAssociationMixin<UserInstance, UserInstance["id"]>;
-  hasUpvoters: Sequelize.BelongsToManyHasAssociationsMixin<UserInstance, UserInstance["id"]>;
+  setUpvoters: Sequelize.BelongsToManySetAssociationsMixin<UserInstance, UserInstance['id'], 'PostUpvotes'>;
+  addUpvoters: Sequelize.BelongsToManyAddAssociationsMixin<UserInstance, UserInstance['id'], 'PostUpvotes'>;
+  addUpvoter: Sequelize.BelongsToManyAddAssociationMixin<UserInstance, UserInstance['id'], 'PostUpvotes'>;
+  createUpvoters: Sequelize.BelongsToManyCreateAssociationMixin<UserAttributes, UserInstance['id'], 'PostUpvotes'>;
+  removeUpvoter: Sequelize.BelongsToManyRemoveAssociationMixin<UserInstance, UserInstance['id']>;
+  removeUpvoters: Sequelize.BelongsToManyRemoveAssociationsMixin<UserInstance, UserInstance['id']>;
+  hasUpvoter: Sequelize.BelongsToManyHasAssociationMixin<UserInstance, UserInstance['id']>;
+  hasUpvoters: Sequelize.BelongsToManyHasAssociationsMixin<UserInstance, UserInstance['id']>;
   countUpvoters: Sequelize.BelongsToManyCountAssociationsMixin;
 };
 
@@ -41,7 +41,7 @@ export const CommentFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequel
     }
   };
 
-  const Comment = sequelize.define<CommentInstance, CommentAttributes>("Comment", attributes);
+  const Comment = sequelize.define<CommentInstance, CommentAttributes>('Comment', attributes);
 
   Comment.associate = models => {
     Comment.belongsTo(models.Post);

@@ -17,18 +17,18 @@ export interface PostAttributes {
 
 export interface PostInstance extends Sequelize.Instance<PostAttributes>, PostAttributes {
   getComments: Sequelize.HasManyGetAssociationsMixin<CommentInstance>;
-  setComments: Sequelize.HasManySetAssociationsMixin<CommentInstance, CommentInstance["id"]>;
-  addComments: Sequelize.HasManyAddAssociationsMixin<CommentInstance, CommentInstance["id"]>;
-  addComment: Sequelize.HasManyAddAssociationMixin<CommentInstance, CommentInstance["id"]>;
+  setComments: Sequelize.HasManySetAssociationsMixin<CommentInstance, CommentInstance['id']>;
+  addComments: Sequelize.HasManyAddAssociationsMixin<CommentInstance, CommentInstance['id']>;
+  addComment: Sequelize.HasManyAddAssociationMixin<CommentInstance, CommentInstance['id']>;
   createComment: Sequelize.HasManyCreateAssociationMixin<CommentAttributes, CommentInstance>;
-  removeComment: Sequelize.HasManyRemoveAssociationMixin<CommentInstance, CommentInstance["id"]>;
-  removeComments: Sequelize.HasManyRemoveAssociationsMixin<CommentInstance, CommentInstance["id"]>;
-  hasComment: Sequelize.HasManyHasAssociationMixin<CommentInstance, CommentInstance["id"]>;
-  hasComments: Sequelize.HasManyHasAssociationsMixin<CommentInstance, CommentInstance["id"]>;
+  removeComment: Sequelize.HasManyRemoveAssociationMixin<CommentInstance, CommentInstance['id']>;
+  removeComments: Sequelize.HasManyRemoveAssociationsMixin<CommentInstance, CommentInstance['id']>;
+  hasComment: Sequelize.HasManyHasAssociationMixin<CommentInstance, CommentInstance['id']>;
+  hasComments: Sequelize.HasManyHasAssociationsMixin<CommentInstance, CommentInstance['id']>;
   countComments: Sequelize.HasManyCountAssociationsMixin;
 
   getAuthor: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
-  setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance["id"]>;
+  setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance['id']>;
   createAuthor: Sequelize.BelongsToCreateAssociationMixin<UserAttributes>;
 };
 
@@ -48,7 +48,7 @@ export const PostFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
     }
   };
 
-  const Post = sequelize.define<PostInstance, PostAttributes>("Post", attributes);
+  const Post = sequelize.define<PostInstance, PostAttributes>('Post', attributes);
 
   Post.associate = models => {
     Post.hasMany(models.Comment);
