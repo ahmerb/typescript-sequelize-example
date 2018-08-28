@@ -8,9 +8,9 @@ export interface UserAttributes {
   name: string;
   createdAt?: Date;
   updatedAt?: Date;
-  comments?: CommentInstance[] | CommentInstance['id'][];
-  posts?: PostInstance[] | PostInstance['id'][];
-  upvotedComments?: CommentInstance[] | CommentInstance['id'][];
+  comments?: CommentAttributes[] | CommentAttributes['id'][];
+  posts?: PostAttributes[] | PostAttributes['id'][];
+  upvotedComments?: CommentAttributes[] | CommentAttributes['id'][];
 };
 
 export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAttributes {

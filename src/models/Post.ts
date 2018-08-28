@@ -11,8 +11,8 @@ export interface PostAttributes {
   category: 'tech' | 'croissants' | 'techno';
   createdAt?: Date;
   updatedAt?: Date;
-  comments?: CommentInstance[] | CommentInstance['id'][];
-  author?: UserInstance | UserInstance['id'];
+  comments?: CommentAttributes[] | CommentAttributes['id'][];
+  author?: UserAttributes | UserAttributes['id'];
 };
 
 export interface PostInstance extends Sequelize.Instance<PostAttributes>, PostAttributes {
