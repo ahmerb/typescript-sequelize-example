@@ -44,7 +44,7 @@ export const CommentFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequel
   const Comment = sequelize.define<CommentInstance, CommentAttributes>('Comment', attributes);
 
   Comment.associate = models => {
-    Comment.belongsTo(models.Post);
+    Comment.belongsTo(models.Post, { as: 'posts' });
     Comment.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
     Comment.belongsToMany(models.User, {
       through: 'PostUpvotes',

@@ -76,6 +76,9 @@ app.post('/seed/user', (req: Request, res: Response) => {
         category: 'techno'
       }
     ]
+  },
+  { 
+    include: [{ model: db.Post, as: 'posts' }]
   })
     .then(user => res.status(201).json({ user }))
     .catch(err => res.status(500).json({ err: ['oops', err] }))

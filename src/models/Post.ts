@@ -51,7 +51,7 @@ export const PostFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
   const Post = sequelize.define<PostInstance, PostAttributes>('Post', attributes);
 
   Post.associate = models => {
-    Post.hasMany(models.Comment);
+    Post.hasMany(models.Comment, { as: 'comments' });
     Post.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
   };
 
