@@ -24,20 +24,20 @@ app.get('/users', (req: Request, res: Response) => {
     .catch(err => res.status(500).json({ err: ['oops', err] }));
 });
 
-app.get('/comments', (req: Request, res: Response) => {
+/* app.get('/comments', (req: Request, res: Response) => {
   db.Comment.findAll()
     .then((comments: CommentInstance[]) => res.status(200).json({ comments }))
     .catch(err => res.status(500).json({ err: ['oops', err] }));
-});
+}); */
 
-app.get('/posts', (req: Request, res: Response) => {
+/* app.get('/posts', (req: Request, res: Response) => {
   db.Post.findAll()
     .then((posts: PostInstance[]) => res.status(200).json({ posts }))
     .catch(err => res.status(500).json({ err: ['oops', err] }));
 });
-
+ */
 // GET all users that upvoted a comment
-app.get('/comments/:id/upvoters', (req: Request, res: Response) => {
+/* app.get('/comments/:id/upvoters', (req: Request, res: Response) => {
   db.Comment.findById(req.params.id)
     .then(comment => comment.getUpvoters())
     .then(upvoters =>
@@ -46,20 +46,29 @@ app.get('/comments/:id/upvoters', (req: Request, res: Response) => {
       })
     )
     .catch(err => res.status(500).json({ err: ['oops', err] }));
-});
+}); */
 
 // GET all posts a user has authored
 app.get('/users/:id/posts', (req: Request, res: Response) => {
   db.User.findById(req.params.id)
     .then(user => user.getPosts())
-    .then(posts => 
+    .then(posts =>
       res.status(200).json({ posts })
     )
     .catch(err => res.status(500).json({ err: ['oops', err] }))
 });
 
-// POST create new dummy user with posts
+// POST create new dummy user with noposts
 app.post('/seed/user', (req: Request, res: Response) => {
+  db.User.create({
+    name: 'hwd'
+  })
+  .then(user => res.status(201).json({ user }))
+  .catch(err => res.status(500).json({ err: ['oops', err] }))
+})
+
+// POST create new dummy user with posts
+/* app.post('/seed/user', (req: Request, res: Response) => {
   db.User.create({
     name: 'John Doe',
     posts: [
@@ -83,7 +92,7 @@ app.post('/seed/user', (req: Request, res: Response) => {
     .then(user => res.status(201).json({ user }))
     .catch(err => res.status(500).json({ err: ['oops', err] }))
 });
-
+ */
 // POST create new dummy upvotes for comment
 // also, use async/await syntax here, just to demonstrate you can do it in typescript
 app.post('/seed/user/:user_id/upvotes', async (req: Request, res: Response) => {
@@ -100,15 +109,15 @@ app.post('/seed/user/:user_id/upvotes', async (req: Request, res: Response) => {
 });
 
 // POST add upvoter
-app.post('/comment/:comment_id/upvoter/:upvoter_id', (req: Request, res: Response) => {
+/* app.post('/comment/:comment_id/upvoter/:upvoter_id', (req: Request, res: Response) => {
   db.Comment.findById(req.params.comment_id)
     .then(comment => comment.addUpvoter(req.params.upvoter_id))
     .catch(err => res.status(500).json({ err: ['oops', err] }))
 });
-
+ */
 // GET all upvoted comments for specified users (using eager loading)
 // userIds go in query params, e.g. /upvoted_comments?userIds=[1,2,3]
-app.get('/upvoted_comments', (req: Request, res: Response) =>  {
+/* app.get('/upvoted_comments', (req: Request, res: Response) =>  {
   console.log(req.query.userIds);
   const userIds = JSON.parse(req.query.userIds);
   db.User.findAll({
@@ -125,7 +134,7 @@ app.get('/upvoted_comments', (req: Request, res: Response) =>  {
       res.status(200).json({ upvotedComments: comments });
     })
     .catch(err => res.status(500).json({ err: ['oops', err] }))
-});
+}); */
 
 app.listen(3000, () => {
   console.log('App listening on port 3000');

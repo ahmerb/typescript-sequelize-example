@@ -6,7 +6,7 @@ import { UserAttributes, UserInstance } from 'models/User';
 export interface DbInterface {
   sequelize: Sequelize.Sequelize;
   Sequelize: Sequelize.SequelizeStatic;
-  Comment: Sequelize.Model<CommentInstance, CommentAttributes>;
-  Post: Sequelize.Model<PostInstance, PostAttributes>;
+/*   Comment: Sequelize.Model<CommentInstance, CommentAttributes>;
+  Post: Sequelize.Model<PostInstance, PostAttributes>; */
   User: Sequelize.Model<UserInstance, UserAttributes>;
 }

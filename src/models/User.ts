@@ -8,9 +8,6 @@ export interface UserAttributes {
   name: string;
   createdAt?: Date;
   updatedAt?: Date;
-  comments?: CommentAttributes[] | CommentAttributes['id'][];
-  posts?: PostAttributes[] | PostAttributes['id'][];
-  upvotedComments?: CommentAttributes[] | CommentAttributes['id'][];
 };
 
 export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAttributes {
@@ -57,14 +54,14 @@ export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
 
   const User = sequelize.define<UserInstance, UserAttributes>('User', attributes);
 
-  User.associate = models => {
+/*   User.associate = models => {
     User.hasMany(models.Comment, { foreignKey: 'AuthorId', as: 'comments' });
     User.hasMany(models.Post, { foreignKey: 'AuthorId', as: 'posts' });
     User.belongsToMany(models.Comment, {
       through: 'PostUpvotes',
       as: 'upvotedComments'
     });
-  };
+  }; */
 
   return User;
 };
