@@ -68,18 +68,16 @@ app.post('/seed/user', (req: Request, res: Response) => {
 })
 
 // POST create new dummy user with posts
-/* app.post('/seed/user', (req: Request, res: Response) => {
+app.post('/seed/userWithPosts', (req: Request, res: Response) => {
   db.User.create({
-    name: 'John Doe',
+    name: 'yunyou123',
     posts: [
       {
-        name: 'post1',
         title: 'Croissants are tasty',
         text: 'I recently ate a croissant from France. It was nice.',
         category: 'croissants'
       },
       {
-        name: 'post2',
         title: 'my fav techno music',
         text: 'I love the song TECHNO by TechnoGang.',
         category: 'techno'
@@ -92,7 +90,7 @@ app.post('/seed/user', (req: Request, res: Response) => {
     .then(user => res.status(201).json({ user }))
     .catch(err => res.status(500).json({ err: ['oops', err] }))
 });
- */
+
 // POST create new dummy upvotes for comment
 // also, use async/await syntax here, just to demonstrate you can do it in typescript
 app.post('/seed/user/:user_id/upvotes', async (req: Request, res: Response) => {
