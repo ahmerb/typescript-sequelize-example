@@ -5,14 +5,13 @@ import { SequelizeAttributes } from 'typings/SequelizeAttributes';
 
 export interface PostAttributes {
   id?: number;
-  name: string;
   title: string;
   text: string;
   category: 'tech' | 'croissants' | 'techno';
   createdAt?: Date;
   updatedAt?: Date;
-  comments?: CommentAttributes[] | CommentAttributes['id'][];
-  author?: UserAttributes | UserAttributes['id'];
+/*   comments?: CommentAttributes[] | CommentAttributes['id'][];
+  author?: UserAttributes | UserAttributes['id']; */
 };
 
 export interface PostInstance extends Sequelize.Instance<PostAttributes>, PostAttributes {
@@ -29,14 +28,11 @@ export interface PostInstance extends Sequelize.Instance<PostAttributes>, PostAt
 
   getAuthor: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
   setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance['id']>;
-  createAuthor: Sequelize.BelongsToCreateAssociationMixin<UserAttributes>;
+  createAuthor: Sequelize.BelongsToCreateAssociationMixin<UserAttributes,UserInstance>;
 };
 
 export const PostFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<PostInstance, PostAttributes> => {
   const attributes: SequelizeAttributes<PostAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
     title: {
       type: DataTypes.STRING
     },
@@ -51,7 +47,7 @@ export const PostFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
   const Post = sequelize.define<PostInstance, PostAttributes>('Post', attributes);
 
   Post.associate = models => {
-    Post.hasMany(models.Comment, { as: 'comments' });
+    // Post.hasMany(models.Comment, { as: 'comments' });
     Post.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
   };
 

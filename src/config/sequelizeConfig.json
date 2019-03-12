@@ -1,10 +1,10 @@
 {
-  "database": "tutorial",
-  "username": "postgres",
-  "password": null,
+  "database": "blog_sys",
+  "username": "root",
+  "password": "root123",
   "params": {
     "host": "localhost",
-    "dialect": "postgres",
+    "dialect": "mysql",
     "operatorsAliases": false
   }
 }
